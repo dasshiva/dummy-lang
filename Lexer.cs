@@ -12,7 +12,7 @@ namespace Lang {
 
 		public string File { get; init; }
 
-		private StreamReader src;
+		private StreamReader? src;
 
 		public Reader (string file) {
 			File = file;
@@ -22,28 +22,27 @@ namespace Lang {
 			}
 			catch (Exception e) {
 				Program.Exit($"Failed to open file {File} : {e.Message}");
-
 			}
 		}
 
-		public string[] ReadLine () {
+		public string[]? ReadLine () {
 			try {
-				string? line = src.ReadLine();
+				string? line = src?.ReadLine();
 				if (line == null) {
-                                        src.Close();
-                                        end = false;
-                                        return null;
-                                }
+                    src?.Close();
+                    end = false;
+                    return null;
+                }
 				lineno++;
 				return line.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 			}
 			catch (Exception e) {
-				/*  We don't change end because 
-				 *  the program never returns */
-
-				src.Close();
+				/*  We don't change end because the program never returns */
+				src?.Close();
 				Program.Exit($"Failed to read from {File} : {e.Message}");
-				return null; // unreachable but kept to prevent the compiler from complaining
+
+				/* unreachable but kept to prevent the compiler from complaining */
+                return null;
 			}
 		}
 	}
