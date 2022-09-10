@@ -29,20 +29,20 @@ namespace Lang {
 			try {
 				string? line = src?.ReadLine();
 				if (line == null) {
-                    src?.Close();
-                    end = false;
-                    return null;
-                }
+					src?.Close();
+		    			end = false;
+					return null;
+				}
 				lineno++;
 				return line.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 			}
 			catch (Exception e) {
-				/*  We don't change end because the program never returns */
+				/*  We don't change end because the program never returns from here */
 				src?.Close();
 				Program.Exit($"Failed to read from {File} : {e.Message}");
 
 				/* unreachable but kept to prevent the compiler from complaining */
-                return null;
+				return null;
 			}
 		}
 	}
