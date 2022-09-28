@@ -13,12 +13,15 @@ namespace Lang {
 
 	public class Tokenizer {
 		public Reader src { get; set; }
+		public Tokenizer(Reader src) {
+			this.src = src;
+		}
 		private TokenizerResult Check(string word) => word switch {
 			"add" => new TokenizerResult(Tokens.INS_ADD, null),
 			"sub" => new TokenizerResult(Tokens.INS_SUB, null),
 			"mul" => new TokenizerResult(Tokens.INS_MUL, null),
 			"div" => new TokenizerResult(Tokens.INS_DIV, null),
-			"function" => new TokenizerResult(Tokens.FSTART, null),
+			"function" => new TokenizerResult(Tokens.K_FSTART, null),
 			"," => new TokenizerResult(Tokens.S_COMMA, null),
 			";" => new TokenizerResult(Tokens.S_SEMI_COL, null),
 			_ => DealRest(word)
@@ -34,7 +37,7 @@ namespace Lang {
 			else if (Double.TryParse(word, out dnum))
 				return new TokenizerResult(Tokens.L_DECIMAL, dnum);
 			else if (word[word.Length - 1] == 'U') {
-				if(UInt64.TryParse(word.SubString(0, word.Length - 2), out unum))
+				if(UInt64.TryParse(word.Substring(0, word.Length - 2), out unum))
 					return new TokenizerResult(Tokens.L_SINT, unum);
 			}
 			return new TokenizerResult(Tokens.L_STRING, word);

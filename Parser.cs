@@ -12,15 +12,16 @@ namespace Lang {
 			var read = src.ReadLine();
 			for (int i = 0; i < read.Length; i++) {
 				switch(read[i].Type) {
-					case Tokens.FSTART:
-					case Tokens.FEND:
+					case Tokens.K_FSTART:
+					case Tokens.K_FEND:
 					{
 						if(read.Length < 2)
-							Exit("Error: Funtion name expected!");
+							Program.Exit("Error: Funtion name expected!");
 						if (read[i + 1].Type != Tokens.L_STRING)
-							Exit("Error: Functiom name must be a string!");
+							Program.Exit("Error: Functiom name must be a string!");
 						ParseFunction((string?) read[i + 1].Arg);
 					}
+                    break;
 
 				}
 			}
@@ -34,7 +35,7 @@ namespace Lang {
 	}
 
 	public class ParserResult {
-		private string functionName;
+		private string? functionName;
 		// private 
 	}
 }
