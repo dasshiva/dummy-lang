@@ -8,6 +8,8 @@ namespace Lang {
 			Environment.Exit(1);
 		}
 
+		public static void SyntaxError(string cause, Reader src) => Exit($"Syntax error (at line {src.LineNo}) : {cause}");
+
 		static void Main (string[] args) {
 			if (args.Length < 1) 
 				Exit("Need a filename!");

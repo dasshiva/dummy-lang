@@ -3,9 +3,9 @@ using System;
 namespace Lang {
 	public enum Tokens {
 		INS_ADD, INS_SUB, INS_MUL, INS_DIV,
-		K_FSTART, K_FEND,
+		K_FSTART, K_FEND, K_REG,
 		S_COMMA, S_SEMI_COL,
-		L_INT, L_SINT, L_DECIMAL, L_STRING,
+		L_INT, L_USINT, /*L_DECIMAL, */ L_STRING,
 		F_EOF
 	}
 
@@ -13,9 +13,11 @@ namespace Lang {
 
 	public class Tokenizer {
 		public Reader src { get; set; }
+
 		public Tokenizer(Reader src) {
 			this.src = src;
 		}
+
 		private TokenizerResult Check(string word) => word switch {
 			"add" => new TokenizerResult(Tokens.INS_ADD, null),
 			"sub" => new TokenizerResult(Tokens.INS_SUB, null),
@@ -30,15 +32,22 @@ namespace Lang {
 
 		private TokenizerResult DealRest(string word) {
 			long inum;
-			double dnum;
+			//double dnum;
 			UInt64 unum;
 			if (Int64.TryParse(word, out inum))
 				return new TokenizerResult(Tokens.L_INT, inum);
-			else if (Double.TryParse(word, out dnum))
-				return new TokenizerResult(Tokens.L_DECIMAL, dnum);
+			/* else if (Double.TryParse(word, out dnum))
+				return new TokenizerResult(Tokens.L_DECIMAL, dnum); */
 			else if (word[word.Length - 1] == 'U') {
 				if(UInt64.TryParse(word.Substring(0, word.Length - 2), out unum))
-					return new TokenizerResult(Tokens.L_SINT, unum);
+					return new TokenizerResult(Tokens.L_USINT, unum);
+			}
+			else if (word[word.Length - 1] == 'r') {
+				if (Int16.TryParse(word.Substring(1), out short reg)) {
+					if (reg > 30)
+					    Program.SyntaxError($"Register {reg} is invalid", src);
+					return new TokenizerResult(Tokens.K_REG, (short?) reg);
+				}
 			}
 			return new TokenizerResult(Tokens.L_STRING, word);
 		}
