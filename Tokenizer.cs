@@ -24,6 +24,7 @@ namespace Lang {
 			"mul" => new TokenizerResult(Tokens.INS_MUL, null),
 			"div" => new TokenizerResult(Tokens.INS_DIV, null),
 			"function" => new TokenizerResult(Tokens.K_FSTART, null),
+			"end" => new TokenizerResult(Tokens.K_FEND, null),
 			"," => new TokenizerResult(Tokens.S_COMMA, null),
 			";" => new TokenizerResult(Tokens.S_SEMI_COL, null),
 			_ => DealRest(word)
@@ -44,7 +45,7 @@ namespace Lang {
 			}
 			else if (word[word.Length - 1] == 'r') {
 				if (Int16.TryParse(word.Substring(1), out short reg)) {
-					if (reg > 30)
+					if (reg < 1 || reg > 12)
 					    Program.SyntaxError($"Register {reg} is invalid", src);
 					return new TokenizerResult(Tokens.K_REG, (short?) reg);
 				}
@@ -55,12 +56,12 @@ namespace Lang {
 		public TokenizerResult[] ReadLine() {
 			var line = src.ReadLine();
 			if (line == null)
-				return new TokenizerResult[] {new TokenizerResult(Tokens.F_EOF, null)};
-		        var ret = new TokenizerResult[line.Length];
-		        for (int i = 0; i < line.Length; i++) {
+				return new TokenizerResult[] { new TokenizerResult(Tokens.F_EOF, null) };
+			var ret = new TokenizerResult[line.Length];
+			for (int i = 0; i < line.Length; i++) {
 				ret[i] = Check(line[i]);
 			}
-		        return ret;	
+		    return ret;	
 		}
 	}
 }

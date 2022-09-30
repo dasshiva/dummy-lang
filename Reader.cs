@@ -34,7 +34,17 @@ namespace Lang {
 					return null;
 				}
 				lineno++;
-				return line.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+				var res = line.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+				var ls = new List<string>();
+				for (int i = 0; i < res.Length; i++) {
+					switch (res[i]) {
+						case ";" :
+						case "," :
+						break;
+						default : ls.Add(res[i]); break;
+					}
+				}
+				return ls.ToArray();
 			}
 			catch (Exception e) {
 				/*  We don't change end because the program never returns from here */
