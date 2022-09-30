@@ -31,14 +31,20 @@ namespace Lang {
 
 		// TODO : IMPLEMENT
         private void ParseLine() {
-			var read = src.ReadLine();
+	    var read = src.ReadLine();
             switch (read[0].Type) {
                 case Tokens.INS_ADD: 
+		case Tokens.INS_SUB:
+		case Tokens.INS_MUL:
+		case Tokens.INS_DIV:
                 {
                     if (read.Length != 4)
                         Program.SyntaxError("Instruction needs 3 args exactly", rd);
                     if (read[1].Type == Tokens.K_REG) {
                         string variant = DetermineVariant(read[2], read[3]);
+			string ins = read[0].ToString();
+			int? insCode = (int?) typeof(Insns).GetField(ins + variant).GetValue(null);
+
                     } 
                 }
                 break;
