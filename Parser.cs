@@ -35,21 +35,30 @@ namespace Lang {
             switch (read[0].Type) {
                 case Tokens.INS_ADD: 
                 {
-                    if (read.Length < 4)
-                        Program.SyntaxError("Instruction needs 3 args", rd);
-                    /*if (read[1].Type == Tokens.K_REG) {
-                        if (read[2].Type ==)
-                    } */
+                    if (read.Length != 4)
+                        Program.SyntaxError("Instruction needs 3 args exactly", rd);
+                    if (read[1].Type == Tokens.K_REG) {
+                        string variant = DetermineVariant(read[2], read[3]);
+                    } 
                 }
                 break;
             }
-		}
+	}
 
-        /* TODO : implement */  
-        private int DetermineVariant(TokenizerResult arg1, TokenizerResult arg2) {
+        private string DetermineVariant(TokenizerResult arg1, TokenizerResult arg2) {
             if (arg1.Type == Tokens.L_INT && arg2.Type == Tokens.L_INT)
-            return (int) Lang.Insns.ADD_SS;
-            return 0;
+		    return "_SS";
+	    
+	    if (arg1.Type == Tokens.L_USINT && arg2.Type == Tokens.L_USINT)
+		    return "_USUS";
+	    
+	    if (arg1.Type == Tokens.L_INT && arg2.Type == Tokens.L_USINT)
+		    return "_SUS";
+	    
+	    if (arg1.Type == Tokens.L_USINT && arg2.Type == Tokens.L_INT)
+		    return "_USS";
+	    return ""; // Unreachable but neccesary for compiler happiness
+            
         }
 
 	}
