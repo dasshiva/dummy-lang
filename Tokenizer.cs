@@ -43,11 +43,11 @@ namespace Lang {
 				if(UInt64.TryParse(word.Substring(0, word.Length - 2), out unum))
 					return new TokenizerResult(Tokens.L_USINT, unum);
 			}
-			else if (word[word.Length - 1] == 'r') {
-				if (Int16.TryParse(word.Substring(1), out short reg)) {
+			else if (word[0] == 'r') {
+				if (Byte.TryParse(word.Substring(1), out byte reg)) {
 					if (reg < 1 || reg > 12)
 					    Program.SyntaxError($"Register {reg} is invalid", src);
-					return new TokenizerResult(Tokens.K_REG, (short?) reg);
+					return new TokenizerResult(Tokens.K_REG, (byte?) reg);
 				}
 			}
 			return new TokenizerResult(Tokens.L_STRING, word);
@@ -61,7 +61,7 @@ namespace Lang {
 			for (int i = 0; i < line.Length; i++) {
 				ret[i] = Check(line[i]);
 			}
-		    return ret;	
+			return ret;	
 		}
 	}
 }

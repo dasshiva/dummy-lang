@@ -40,7 +40,7 @@ namespace Lang {
 					switch (res[i]) {
 						case ";" :
 						case "," :
-						break;
+						continue;
 						default : ls.Add(res[i]); break;
 					}
 				}
