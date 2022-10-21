@@ -19,7 +19,6 @@ namespace Lang {
 				var res = a.Parse();
 				if (res.functionName == null)
 					break;
-				Console.WriteLine("Written");
 				cs.Write(res);
 			}
 		}

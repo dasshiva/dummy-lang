@@ -21,7 +21,6 @@ namespace Lang {
             writer.Write((ulong) FileConstants.MAGIC);
             writer.Write((ushort) FileConstants.MAJOR_VERSION);
             writer.Write((ushort) FileConstants.MINOR_VERSION);
-	    Console.WriteLine("Here");
             ready = true;
         }
         
@@ -59,6 +58,7 @@ namespace Lang {
 		    SmartWrite(ins.args[2]);
 	    }
 	    writer.Write((ushort)0xED);
+	    writer.Flush();
         }
 
         ~Codegen() {
