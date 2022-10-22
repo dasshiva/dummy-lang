@@ -52,8 +52,7 @@ namespace Lang {
      								var insCode = typeof(Insns).GetField(ins + variant)?.GetValue(null);
 	if (insCode == null)
 		Program.SyntaxError("Arguments for instruction are not in proper order", rd);
-
-	ls.Add(new Insn((int) insCode, new object[] { read[1].Arg , read[2].Arg, read[3].Arg }));
+	ls.Add(new Insn((ushort) insCode , new object[] { read[1].Arg , read[2].Arg, read[3].Arg }));
 #pragma warning restore CS8601, CS8602, CS8629
 	    						}
 

@@ -13,7 +13,7 @@ namespace Lang {
     USR - Immediate unsigned int and register
     */
 
-    public enum Insns { 
+    public enum Insns : ushort { 
         /* Variants of the add instruction */
         ADD_USS = 0x01,
         ADD_SUS = 0x02,
@@ -61,9 +61,9 @@ namespace Lang {
         R7 = 0xBA, R8 = 0xBB, R9 = 0xBC, R10 = 0xBD, R11 = 0xBE, R12 = 0XBF
     }
 
-    public enum FileConstants : long {
+    public enum FileConstants : ulong {
         MAGIC = 0x4D41474943 , /* String "MAGIC" */
-        MINOR_VERSION = 0x0,
-        MAJOR_VERSION = 0x1
+        MINOR_VERSION = 0x1,
+        MAJOR_VERSION = 0x0
     }
 }

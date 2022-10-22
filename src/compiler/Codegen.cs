@@ -48,7 +48,7 @@ namespace Lang {
 	    writer.Write(pr.functionName);
 	    foreach (Insn ins in pr.impl) {
 		    // Write the instruction code
-		    writer.Write(ins.insn);
+		    writer.Write((ushort) ins.insn);
 
 		    // The first argument to any instruction is the destination register
 		    WriteRegister(ins.args[0]);
