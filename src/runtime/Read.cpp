@@ -22,8 +22,5 @@ u4 Read_U4(std::ifstream& src) {
 u8 Read_U8(std::ifstream& src) {
 	u8 res;
 	src.read((char*) &res, sizeof(u8));
-  	/*res = ((res << 8) & 0xFF00FF00FF00FF00ULL ) | ((res >> 8) & 0x00FF00FF00FF00FFULL );
-    	res= ((res << 16) & 0xFFFF0000FFFF0000ULL ) | ((res >> 16) & 0x0000FFFF0000FFFFULL );
-    	return (res << 32) | (res >> 32); */
 	return res;
 }

@@ -9,7 +9,13 @@ public class Methods {
 	public:
 		u4 Name_Len;
 		std::string Name;
-		Insn* insn;
+		Insn* Ins;
+
+		Methods(int met_num) :  num(met_num) {}
+		void Prepare();
+
+	private:
+		int num;
 
 }
 

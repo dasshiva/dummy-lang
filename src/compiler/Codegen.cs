@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Lang {
     public class Codegen {
@@ -42,22 +43,24 @@ namespace Lang {
 		}
 	}
 
-        public void Write(ParserResult pr) {
+        public void Write(List<ParserResult> list) {
             if(!ready)
                Init();
-	    writer.Write(pr.functionName);
-	    foreach (Insn ins in pr.impl) {
-		    // Write the instruction code
-		    writer.Write((ushort) ins.insn);
+	    writer.Write((ushort) list.Count);
+	    foreach (ParserResult pr in list) { 
+		    writer.Write(pr.functionName);
+		    foreach (Insn ins in pr.impl) {
+			    // Write the instruction code
+			    writer.Write((ushort) ins.insn);
+			    // The first argument to any instruction is the destination register
+			    WriteRegister(ins.args[0]);
 
-		    // The first argument to any instruction is the destination register
-		    WriteRegister(ins.args[0]);
-
-		    // The second and third argument to any instruction may be an immediate value or register
-		    SmartWrite(ins.args[1]);
-		    SmartWrite(ins.args[2]);
+			    // The second and third argument to any instruction may be an immediate value or register
+			    SmartWrite(ins.args[1]);
+			    SmartWrite(ins.args[2]);
+		    }
+		    writer.Write((ushort) 0xED);
 	    }
-	    writer.Write((ushort)0xED);
 	    writer.Flush();
         }
 

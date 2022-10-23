@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Lang;
 
 namespace Lang {
@@ -15,11 +16,13 @@ namespace Lang {
 				Exit("Need a filename!");
 			Parser a = new Parser(new Tokenizer(new Reader(args[0])));
 			Codegen cs = new Codegen("a.out");
+			var list = new List<ParserResult>();
 			while (true) {
 				var res = a.Parse();
 				if (res.functionName == null)
 					break;
-				cs.Write(res);
+				list.Add(res);
+				cs.Write(list);
 			}
 		}
 	}

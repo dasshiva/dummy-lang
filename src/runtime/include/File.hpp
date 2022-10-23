@@ -3,6 +3,7 @@
 
 #include "Types.hpp"
 #include "Methods.hpp"
+#include <fstream>
 
 public class File {
 	public:
@@ -10,6 +11,12 @@ public class File {
 		u2 Major;
 		u2 Minor;
 		Methods* Mt;
+
+		File(std::ifstream& src) : file(src) {};
+		void Prepare();
+
+	private:
+		std::ifstream file;
 
 }
 
