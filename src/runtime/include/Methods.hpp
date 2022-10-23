@@ -4,19 +4,22 @@
 #include <string>
 #include "Types.hpp"
 #include "Insn.hpp"
+#include <fstream>
 
-public class Methods {
+class Methods {
 	public:
 		u4 Name_Len;
 		std::string Name;
 		Insn* Ins;
 
-		Methods(int met_num) :  num(met_num) {}
+		Methods(std::ifstream* src) {
+			file = src;
+		}
 		void Prepare();
 
 	private:
-		int num;
+		std::ifstream* file;
 
-}
+};
 
 #endif
