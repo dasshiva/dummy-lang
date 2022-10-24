@@ -5,7 +5,7 @@
 #include "Methods.hpp"
 #include <fstream>
 
-public class File {
+class File {
 	public:
 		u8 Magic;
 		u2 Major;
@@ -13,12 +13,14 @@ public class File {
 		u2 Methods_Len;
 		Methods* Mt;
 
-		File(std::ifstream& src) : file(src) {};
+		File(std::ifstream* src) {
+			file = src;
+		}
 		void Prepare();
 
 	private:
-		std::ifstream file;
+		std::ifstream *file;
 
-}
+};
 
 #endif

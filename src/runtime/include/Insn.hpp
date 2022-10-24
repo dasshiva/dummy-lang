@@ -5,14 +5,14 @@
 
 union Arg {
 	i64 IArg;
-	u64 UArg;
-}
+	u8 UArg;
+};
 
-public class Insn {
+class Insn {
 	public:
 		u2 Code;
 		u1 Dest;
-		union* Args;
-}
+		union Arg* Args;
+};
 
 #endif
