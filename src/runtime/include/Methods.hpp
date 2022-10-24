@@ -11,7 +11,7 @@ public class Methods {
 		std::string Name;
 		Insn* Ins;
 
-		Methods(int met_num) :  num(met_num) {}
+		Methods(int ins_num) :  num(ins_num) {}
 		void Prepare();
 
 	private:

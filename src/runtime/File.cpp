@@ -20,6 +20,6 @@ void File::Prepare() {
 	if (Minor != MINOR_VERSION)
 		Exit("This VM does not support this minor version");
 
-	mt = new Methods(Read_U2(file));
+	Methods_Len = Read_U2(file);
 	mt.Prepare();
 }
