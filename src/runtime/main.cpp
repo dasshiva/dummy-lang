@@ -5,6 +5,7 @@
 
 #include "include/Read.hpp"
 #include "include/aixlog.hpp"
+#include "include/File.hpp"
 
 void Exit(const char* reason) {
 	std::cout << reason;
@@ -22,4 +23,6 @@ int main(int argc, const char* argv[]) {
 	LOG(DEBUG) << Read_U8(in);
 	LOG(DEBUG) << Read_U2(in);
 	LOG(DEBUG) << Read_U2(in);
+	File cf(&in);
+	cf.Prepare();
 }

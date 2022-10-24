@@ -12,13 +12,9 @@ class Methods {
 		std::string Name;
 		Insn* Ins;
 
-<<<<<<< HEAD
-		Methods(int ins_num) :  num(ins_num) {}
-=======
 		Methods(std::ifstream* src) {
 			file = src;
 		}
->>>>>>> 4e3a4b960070c1f3806af437dd7a8b03c0013b46
 		void Prepare();
 
 	private:
