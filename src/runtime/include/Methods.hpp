@@ -8,7 +8,7 @@
 
 class Methods {
 	public:
-		u4 Name_Len;
+		u2 Name_Len;
 		std::string Name;
 		Insn* Ins;
 
