@@ -45,6 +45,8 @@
 #include <sstream>
 #include <thread>
 #include <vector>
+#include <iomanip>
+#include "main.hpp"
 
 #ifdef __ANDROID__
 #include <android/log.h>
@@ -731,6 +733,9 @@ protected:
     virtual void do_log(std::ostream& stream, const Metadata& metadata, const std::string& message) const
     {
         std::string result = format_;
+	bool ext = false;
+	if (metadata.severity >= ERROR)
+		ext = true;
         if (metadata.timestamp)
             result = metadata.timestamp.to_string(result);
 
@@ -759,6 +764,7 @@ protected:
             result.replace(pos, 9, metadata.function ? metadata.function.name : "");
 
         pos = result.find("#message");
+	stream << std::setbase(16);
         if (pos != std::string::npos)
         {
             result.replace(pos, 8, message);
@@ -771,6 +777,7 @@ protected:
             else
                 stream << result << " " << message << std::endl;
         }
+	if (ext) Exit("Application encountered a problem");
     }
 
     std::string format_;
