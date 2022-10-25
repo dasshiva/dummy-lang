@@ -1,11 +1,13 @@
 #ifndef _TYPES_HPP_
 #define _TYPES_HPP_
 
-typedef unsigned char u1;
-typedef unsigned short u2;
-typedef unsigned int u4;
-typedef unsigned long u8;
+#include <cstdint>
 
-typedef long i64;
+typedef std::uint8_t u1;
+typedef std::uint16_t u2;
+typedef std::uint32_t u4;
+typedef std::uint64_t u8;
+
+typedef std::int64_t i64;
 
 #endif

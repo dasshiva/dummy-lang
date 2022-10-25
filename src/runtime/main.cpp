@@ -3,8 +3,6 @@
 #include <fstream>
 #include <cstdlib>
 
-#include "include/Read.hpp"
-#include "include/aixlog.hpp"
 #include "include/File.hpp"
 
 void Exit(const char* reason) {
@@ -18,7 +16,6 @@ int main(int argc, const char* argv[]) {
 	std::ifstream in(argv[1], std::ios::binary);
 	if (!in.good())
 		Exit("Unable to read input file");
-	AixLog::Log::init<AixLog::SinkCout>(AixLog::Severity::trace);
 	File cf(&in);
 	cf.Prepare();
 }
