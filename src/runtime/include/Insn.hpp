@@ -2,9 +2,10 @@
 #define _INSN_HPP_
 
 #include "Types.hpp"
+#include <fstream>
 
 union Arg {
-	i64 IArg;
+	i8 IArg;
 	u8 UArg;
 };
 
@@ -13,6 +14,7 @@ class Insn {
 		u2 Code;
 		u1 Dest;
 		union Arg* Args;
+		void Prepare(std::ifstream* f);
 };
 
 #endif

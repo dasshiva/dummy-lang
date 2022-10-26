@@ -10,7 +10,7 @@ class Methods {
 	public:
 		u2 Name_Len;
 		std::string Name;
-		Insn* Ins;
+		Insn** Ins;
 
 		Methods(std::ifstream* src) {
 			file = src;
@@ -19,6 +19,7 @@ class Methods {
 
 	private:
 		std::ifstream* file;
+		u2 insn_num;
 
 };
 
