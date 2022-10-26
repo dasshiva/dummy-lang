@@ -5,10 +5,11 @@
 #include <iomanip>
 #include <string>
 #include <cstdarg>
+#include <cstring>
 #include "Types.hpp"
 
 #define LOG(Severity, Message, ...) \
-	Log(Severity,  __LINE__, __FILE__, __func__, Message, __VA_ARGS__);
+	Log(Severity, __LINE__, __FILE__, __func__, Message, __VA_ARGS__);
 
 enum {
 	debug = 1,
@@ -16,19 +17,22 @@ enum {
 	fatal = 3
 };
 
-static char* to_String(int i) {
+static auto to_String(int i) {
 	switch(i) {
-		case debug: return "DEBUG";
-		case info:  return "INFO";
-		case fatal: return "FATAL";
+		case debug: return (const char*) "DEBUG";
+		case info:  return (const char*) "INFO";
+		case fatal: return (const char*) "FATAL";
+		default: return (const char*) "";
 	}
 }
 
-static void Log(int s, int line, const char* file, const char* name, char* message, ...) {
+static void Log(int s, int line, const char* file, const char* name, const char* msg, ...) {
 	std::string str;
 	std::va_list ap;
-	va_start(ap, message);
-	char *a = message, *c;
+	va_start(ap, msg);
+	char buf[100];
+	strcpy(buf, msg);
+	char *a = buf , *c;
 	int i;
 	while (*a) {
 		if(*a != '%')

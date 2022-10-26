@@ -12,7 +12,7 @@ void File::Prepare() {
 	Magic = Read_U8(*file);
 	if (Magic != MAGIC)
 		LOG(fatal, "Invalid magic number for file:  %i", Magic);
-	LOG(debug, "Validated Magic number (Expected = %i, Got= %i)", MAGIC, Magic);
+	LOG(debug, "Validated Magic number (Expected = %i, Got = %i)", MAGIC, Magic);
 
 	Major = Read_U2(*file);
 	if (Major != MAJOR_VERSION)
