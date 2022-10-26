@@ -8,6 +8,6 @@ typedef std::uint16_t u2;
 typedef std::uint32_t u4;
 typedef std::uint64_t u8;
 
-typedef std::int64_t i64;
+typedef std::int64_t i8;
 
 #endif
