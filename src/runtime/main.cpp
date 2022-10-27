@@ -16,6 +16,6 @@ int main(int argc, const char* argv[]) {
 	std::ifstream in(argv[1], std::ios::binary);
 	if (!in.good())
 		Exit("Unable to read input file");
-	File cf(&in);
-	cf.Prepare();
+	File cf;
+	cf.Prepare(in);
 }

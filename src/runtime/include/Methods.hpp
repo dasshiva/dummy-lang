@@ -11,14 +11,9 @@ class Methods {
 		u2 Name_Len;
 		std::string Name;
 		Insn** Ins;
-
-		Methods(std::ifstream* src) {
-			file = src;
-		}
-		void Prepare();
+		void Prepare(std::ifstream& file);
 
 	private:
-		std::ifstream* file;
 		u2 insn_num;
 
 };

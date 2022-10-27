@@ -12,14 +12,7 @@ class File {
 		u2 Minor;
 		u2 Methods_Len;
 		Methods* Mt;
-
-		File(std::ifstream* src) {
-			file = src;
-		}
-		void Prepare();
-
-	private:
-		std::ifstream *file;
+		void Prepare(std::ifstream& file);
 
 };
 
