@@ -7,10 +7,11 @@
 /* To understand what the suffixes mean, check 
  * src/compiler/LangModel.cs */
 
-enum class Ins: u2 {
+enum Insns {
 	ADD_USS = 0x01,
 	ADD_SUS = 0x02,
-  	ADD_SS = 0x03,                                             ADD_USUS = 0x04,
+  	ADD_SS = 0x03,                                           
+      	ADD_USUS = 0x04,
   	ADD_RS = 0x05,
     	ADD_SR = 0x06,
   	ADD_RUS = 0x07,
@@ -42,7 +43,7 @@ enum class Ins: u2 {
   	DIV_SR = 0xC6,                                
 	DIV_RUS = 0xC7,                                
 	DIV_USR = 0xC8
-}
+};
 
 union Arg {
 	i8 IArg;
@@ -51,15 +52,15 @@ union Arg {
 
 class Insn {
 	public:
-		Ins ins;
-		u1 len
+		Insns ins;
+		u1 len;
 		u1 dest;
 		union Arg** args;
 
-		void Prepare(std::ifstream* f);
+		void Prepare(std::ifstream& f);
 	
 	private:
-		Ins GetInsn(u2 code);
+		Insns GetInsn(u2 code);
 		u1 GetArgLen();
 };
 
