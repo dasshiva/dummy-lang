@@ -15,14 +15,14 @@ namespace Lang {
       if (args.Length < 1)
         Exit("Need a filename!");
       Parser a = new Parser(new Tokenizer(new Reader(args[0])));
-      Codegen cs = new Codegen("a.out");
+      //Codegen cs = new Codegen("a.out");
       var list = new List < ParserResult > ();
       while (true) {
         var res = a.Parse();
         if (res.functionName == null)
           break;
         list.Add(res);
-        cs.Write(list);
+        //cs.Write(list);
       }
     }
   }
