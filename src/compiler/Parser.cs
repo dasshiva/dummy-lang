@@ -1,7 +1,7 @@
 using System;
 
 namespace Lang {
-  public readonly record struct Insn(int insn, object[] args);
+  public readonly record struct Insn(string layout, string insn, object[] args);
   public readonly record struct ParserResult(string ? functionName, List < Insn > impl);
 
   public class Parser {
@@ -47,10 +47,9 @@ namespace Lang {
             string variant = DetermineVariant(read[2], read[3]);
             string ins = read[0].Type.ToString().TrimStart("INS_".ToCharArray());
             #pragma warning disable CS8601, CS8602, CS8629
-            var insCode = typeof (Insns).GetField(ins + variant)?.GetValue(null);
-            if (insCode == null)
+            if (typeof(Insns).GetField(ins + variant)?.GetValue(null)== null)
               Program.SyntaxError("Arguments for instruction are not in proper order", rd);
-            ls.Add(new Insn((ushort) insCode, new object[] {
+            ls.Add(new Insn(variant, ins, new object[] {
               read[1].Arg, read[2].Arg, read[3].Arg
             }));
             #pragma warning restore CS8601, CS8602, CS8629

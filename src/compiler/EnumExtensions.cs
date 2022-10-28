@@ -18,5 +18,21 @@ namespace Lang {
         _ => ""
     };
 
+    public static int GetIndex(this Registers rs) => rs
+    switch {
+      Registers.R1 => 0,
+        Registers.R2 => 1,
+	Registers.R3 => 2,
+	Registers.R4 => 3,
+	Registers.R5 => 4,
+	Registers.R6 => 5,
+	Registers.R7 => 6,
+	Registers.R8 => 7,
+	Registers.R9 => 8,
+	Registers.R10 => 9,
+	Registers.R11 => 10,
+	Registers.R12 => 11,
+	_ => -1
+    };
   }
 }
